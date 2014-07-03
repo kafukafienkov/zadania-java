@@ -1,6 +1,9 @@
 import java.io.FileNotFoundException;
 import java.util.List;
 
+/**
+ * Wczytuje daty z pliku
+ */
 public class Main {
     public static void main(String[] args) {
 
