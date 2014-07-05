@@ -1,41 +1,27 @@
-import java.util.ArrayList;
-import java.util.List;
+import org.joda.time.LocalDate;
+
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DatesUtil {
+    private final String[] daysOfWeek = {"Pn", "Wt", "Śr", "Cz", "Pt", "So", "N"};
 
-    /*private String[] getDatesArray(){
-
-        String datesFromUser = "";
-        List<String> userDates = new ArrayList<String>();
-
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(datesFromUser);
-
-        while (matcher.find()) {
-            datesFromUser += " " + matcher.group();
+    public LocalDate convertDate(String date) {
+        try {
+            StringTokenizer tokenizer = new StringTokenizer(date, "-");
+            int year = Integer.parseInt(tokenizer.nextToken());
+            int month = Integer.parseInt(tokenizer.nextToken());
+            int day = Integer.parseInt(tokenizer.nextToken());
+            return new LocalDate(year, month, day);
+        } catch (NumberFormatException e) {
+            return null;
         }
+    }
 
-        StringTokenizer st = new StringTokenizer(datesFromUser, " ");
-        while (st.hasMoreTokens()) {
-            userDates.add(st.nextToken());
+    public void printDatesBetween(LocalDate firstDate, LocalDate secondDate) {
+        while (firstDate.compareTo(secondDate) <= 0) {
+            int dayOfWeek = firstDate.getDayOfWeek();
+            System.out.println(firstDate.toString("dd.MM.yyyy ") + daysOfWeek[dayOfWeek-1]);
+            firstDate = firstDate.plusDays(1);
         }
-
-        String[] datesArray = userDates.toString();
-
-    } return datesArray();
-}
-
-    public String matchingDates() {
-        String matchingDates = "";
-
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(dates);
-
-        while (matcher.find()) {
-            matchingDates += " " + matcher.group();
-        }
-        return matchingDates;*/
+    }
 }
